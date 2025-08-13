@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Fetch Example</title>
+  <style>
+    #loading {
+      font-size: 20px;
+      color: blue;
+    }
+    #data {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Data Fetch Example</h1>
+
+  <div id="loading">Loading data, please wait...</div>
+  <div id="data" style="display: none;"></div>
+
+  <script>
+    // Simulated fetch from a "database"
+    function fetchDataFromDatabase() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          // Simulate data fetched from DB
+          const data = {
+            name: "Ali Khan",
+            age: 28,
+            profession: "Software Developer"
+          };
+          resolve(data);
+        }, 2000); // 2 seconds delay
+      });
+    }
+
+    async function loadData() {
+      const data = await fetchDataFromDatabase();
+
+      // Hide the loading message
+      document.getElementById('loading').style.display = 'none';
+
+      // Show the fetched data
+      const dataDiv = document.getElementById('data');
+      dataDiv.style.display = 'block';
+      dataDiv.innerHTML = `
+        <strong>Name:</strong> ${data.name}<br>
+        <strong>Age:</strong> ${data.age}<br>
+        <strong>Profession:</strong> ${data.profession}
+      `;
+    }
+
+    // Start loading when the page is loaded
+    window.onload = loadData;
+  </script>
+
+</body>
+</html>
